@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>logo-homepage</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        #header {
+            background-color: rgba(0, 0, 0, 0.4);
+            width: 100%;
+            height: 3rem;
+            position: fixed;
+            top: 0;
+            z-index: 100;
+        }
+
+        #site-wrapper {
+            width: 100%;
+            height: 30rem;
+            background-image: url(wrapper2.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #header #logo {
+            width: 10rem;
+            height: 10rem;
+            background-image: url(LOGO.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 101;
+            position: absolute;
+            top: 1.5rem;
+            left: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            margin: 1rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: large;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+        }
+
+        nav .search-box {
+            position: absolute;
+            top: -0.3rem;
+            right: 0.5rem;
+            margin: 1rem 0.5rem;
+        }
+
+        nav .search-box input {
+            font-size: large;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            letter-spacing: 0.1rem;
+        }
+
+        nav .search-box button {
+            width: 1.5rem;
+            height: 1.5rem;
+            background-image: url(search2.png);
+            background-color: transparent;
+            background-size: cover;
+            border: none;
+            cursor: pointer;
+            float: right;
+        }
+
+        .news {
+            width: 50rem;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 3rem;
+        }
+
+        .news h3>u {
+            user-select: none;
+        }
+
+        .news ul {
+            list-style: none;
+            margin: 1rem;
+        }
+
+        .newsparts>li {
+            position: relative;
+            padding: 1.5rem;
+            border-top: solid 1px #000;
+        }
+
+        .newsparts>li a {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .newsparts>li dl {
+            display: table;
+            z-index: 1;
+        }
+
+        .newsparts>li dl dt,
+        dd {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .newsparts>li dl dt {
+            width: 150px;
+        }
+
+        .newsparts>li dl dd .category b {
+            margin-right: 0.5rem;
+            padding: 0.4rem 0.5rem;
+            display: inline-block;
+            background-color: black;
+            color: aliceblue;
+            letter-spacing: 0.04em;
+            line-height: 1;
+        }
+
+        .newsparts>li strong {
+            display: block;
+            padding-top: 1rem;
+            letter-spacing: 0.08em;
+        }
+
+        .sidebar {
+            width: 15rem;
+            height: 15rem;
+            background-color: rgba(240, 120, 80, 0.8);
+            position: fixed;
+            top: 15rem;
+            right: 0;
+        }
+
+        .sidebar .btn-sidebar-open {
+            cursor: pointer;
+            background-image: url(OPEN2.png);
+            width: 2em;
+            height: 12rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            position: absolute;
+            top: 1rem;
+            left: -2rem;
+        }
+
+        .sidebar .btn-sidebar-close {
+            cursor: pointer;
+            background-image: url(CLOSE2.png);
+            width: 2rem;
+            height: 12rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            position: absolute;
+            top: 1rem;
+            left: -2rem;
+        }
+
+        .sidebar .code-box {
+            width: 11rem;
+            height: 11rem;
+            background-color: #000;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+        }
+
+        .sidebar .code {
+            cursor: zoom-in;
+            width: 10rem;
+            height: 10rem;
+            background-image: url(code.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            transition: transform 1.5s;
+        }
+
+        .sidebar .code:hover {
+            transform: scale(1.1);
+        }
+
+        .sidebar #tooltip {
+            display: none;
+            color: aliceblue;
+            background-color: rgba(10, 10, 10, 0.6);
+            padding: 0.1rem;
+            position: absolute;
+            top: 0;
+            box-shadow: 2px 2px 4px rgba(120, 80, 90, 0.8);
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div id="site-wrapper"></div>
+    <div id="header">
+        <div id="logo"></div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">About Us</a>
+                </li>
+                <li>
+                    <a href="#">Products</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">FAQ</a>
+                </li>
+                <li>
+                    <a href="#">Contact Us</a>
+                </li>
+                <li>
+                    <a href="#">Blog</a>
+                </li>
+            </ul>
+            <div class="search-box">
+                <input type="text" placeholder="search for...">
+                <button type="image-button"></button>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="news">
+        <h3>
+            <u>NEWS</u>
+        </h3>
+        <ul class="newsparts">
+            <li class="newsparts_list">
+                <a href="https://google.com"></a>
+                <dl>
+                    <dt class="time">2023.9.25</dt>
+                    <dd>
+                        <span class="category">
+                            <b>運動</b>
+                        </span>
+                        <strong>【網球賽事】ATP年度總決賽 11/12日開賽</strong>
+
+                    </dd>
+                </dl>
+            </li>
+            <li class="newsparts_list">
+                <a href="https://google.com"></a>
+                <dl>
+                    <dt class="time">2023.9.20</dt>
+                    <dd>
+                        <span class="category">
+                            <b>遊戲</b>
+                        </span>
+                        <strong>【手機遊戲】現在預約「game」 就送100連抽</strong>
+                    </dd>
+                </dl>
+            </li>
+            <li class="newsparts_list">
+                <a href="https://google.com"></a>
+                <dl>
+                    <dt class="time">2023.9.08</dt>
+                    <dd>
+                        <span class="category">
+                            <b>音樂</b>
+                        </span>
+                        <strong>【ARTIST】9/15(五)「song」MV公開</strong>
+                    </dd>
+                </dl>
+            </li>
+            <li class="newsparts_list">
+                <a href="https://google.com"></a>
+                <dl>
+                    <dt class="time">2023.9.08</dt>
+                    <dd>
+                        <span class="category">
+                            <b>音樂</b>
+                        </span>
+                        <strong>【ARTIST】9/15(五)「song」MV公開</strong>
+                    </dd>
+                </dl>
+            </li>
+            <li class="newsparts_list">
+                <a href="https://google.com"></a>
+                <dl>
+                    <dt class="time">2023.9.08</dt>
+                    <dd>
+                        <span class="category">
+                            <b>音樂</b>
+                        </span>
+                        <strong>【ARTIST】9/15(五)「song」MV公開</strong>
+                    </dd>
+                </dl>
+            </li>
+            <li class="newsparts_list">
+                <a href="https://google.com"></a>
+                <dl>
+                    <dt class="time">2023.9.08</dt>
+                    <dd>
+                        <span class="category">
+                            <b>音樂</b>
+                        </span>
+                        <strong>【ARTIST】9/15(五)「song」MV公開</strong>
+                    </dd>
+                </dl>
+            </li>
+            <li class="newsparts_list">
+                <a href="https://google.com"></a>
+                <dl>
+                    <dt class="time">2023.9.08</dt>
+                    <dd>
+                        <span class="category">
+                            <b>音樂</b>
+                        </span>
+                        <strong>【ARTIST】9/15(五)「song」MV公開</strong>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sidebar">
+        <div class="btn-sidebar-open" style="display: none;"></div>
+        <div class="btn-sidebar-close" style="display: block;"></div>
+        <div class="code-box">
+            <div class="code"></div>
+            <div id="tooltip">點選可放大</div>
+        </div>
+        <!-- <div class="sidebar-btns">
+            <a class="sidebar-btn-part" target="_blank" href="#"></a>
+            <a class="sidebar-btn-part" target="_blank" href="#"></a>
+            <a class="sidebar-btn-part" target="_blank" href="#"></a>
+            <a class="sidebar-btn-part btn-top"></a>
+        </div> -->
+    </div>
+
+
+
+
+
+
+    <script>
+        var sidebar = document.querySelector(".sidebar");
+        var btnSidebarClose = document.querySelector(".btn-sidebar-close");
+        var btnSidebarOpen = document.querySelector(".btn-sidebar-open");
+        btnSidebarClose.addEventListener("click", function () {
+            this.style.display = "none";
+            btnSidebarOpen.style.display = "block";
+            sidebar.style.transition = "transform 2s";
+            sidebar.style.transform = "translateX(15rem)";
+        })
+        btnSidebarOpen.addEventListener("click", function () {
+            this.style.display = "none";
+            btnSidebarClose.style.display = "block";
+            sidebar.style.transition = "transform 2s";
+            sidebar.style.transform = "translateX(0)";
+        })
+
+        var tooltip = document.querySelector("#tooltip");
+        var qr = document.querySelector(".code");
+        qr.addEventListener("mouseover", function () {
+            tooltip.style.display = "block";
+        })
+        qr.addEventListener("mouseout", function () {
+            tooltip.style.display = "none";
+        })
+        var isScaled = false;
+        qr.addEventListener("click", function () {
+            if (isScaled) {
+                this.style.scale = "1";
+                this.style.cursor = "zoom-in";
+                tooltip.style.display = "block";
+                tooltip.innerHTML = "點選可放大";
+                isScaled = false;
+            } else {
+                this.style.scale = "1.37";
+                this.style.cursor = "zoom-out";
+                tooltip.style.display = "none";
+                tooltip.innerHTML = "點選可縮小";
+                isScaled = true;
+            }
+
+        })
+
+        var elements = document.querySelectorAll("a");
+        elements.forEach(function (element) {
+            element.addEventListener("mouseover", function () {
+                this.style.backgroundColor = "rgba(0, 80, 150, 0.2)";
+            });
+            element.addEventListener("mouseout", function () {
+                this.style.backgroundColor = "";
+            });
+        });
+
+    </script>
+
+
+</body>
+
+</html>
